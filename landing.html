@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milliprime — The Age of Absolute Abundance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0a0a0f;
+            --dark-secondary: #1a1a25;
+            --electric-blue: #00d4ff;
+            --electric-purple: #a64dff;
+            --electric-pink: #ff006e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a8;
+            --accent-glow: 0 0 30px rgba(0, 212, 255, 0.3);
+            --transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============ UTILITIES ============ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section.dark-alt {
+            background-color: rgba(26, 26, 37, 0.4);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.2em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); }
+        h2 { font-size: clamp(2rem, 6vw, 3.5rem); }
+        h3 { font-size: clamp(1.3rem, 4vw, 2rem); }
+
+        p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.2em;
+        }
+
+        a {
+            color: var(--electric-blue);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--electric-pink);
+            text-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: transparent;
+            border: 2px solid var(--electric-blue);
+            color: var(--electric-blue);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--electric-blue);
+            z-index: -1;
+            transition: left 0.4s ease;
+        }
+
+        .btn:hover {
+            color: var(--dark-bg);
+            left: 0;
+            box-shadow: var(--accent-glow);
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn.primary {
+            border-color: var(--electric-blue);
+            color: var(--electric-blue);
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(166, 77, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero h1 {
+            background: linear-gradient(135deg, var(--electric-blue) 0%, var(--electric-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5em;
+            text-shadow: 0 0 80px rgba(0, 212, 255, 0.3);
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--electric-blue);
+            margin-bottom: 1em;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            animation: fadeInUp 1.5s ease-out 0.2s backwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 2em 0 3em;
+            line-height: 1.8;
+            animation: fadeInUp 1.5s ease-out 0.4s backwards;
+        }
+
+        .hero .btn {
+            animation: fadeInUp 1.5s ease-out 0.6s backwards;
+        }
+
+        /* ============ STATS SECTION ============ */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin: 80px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .stat-card:hover {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--electric-blue);
+            box-shadow: var(--accent-glow);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            margin-bottom: 0.3em;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ============ THE SHIFT SECTION ============ */
+        .the-shift {
+            padding-top: 150px;
+        }
+
+        .shift-content h2 {
+            color: var(--electric-blue);
+            margin-bottom: 1em;
+        }
+
+        .shift-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: 3em;
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* ============ WHO ARE MILLIPRIMES ============ */
+        .who-are {
+            text-align: center;
+        }
+
+        .who-are h2 {
+            color: var(--electric-blue);
+            margin-bottom: 2em;
+        }
+
+        .who-statement {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: 1.5em;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            animation: fadeInUp 1s ease-out backwards;
+        }
+
+        .who-statement:nth-child(2) { animation-delay: 0.1s; }
+        .who-statement:nth-child(3) { animation-delay: 0.2s; }
+        .who-statement:nth-child(4) { animation-delay: 0.3s; }
+
+        .who-statement strong {
+            color: var(--electric-blue);
+            font-weight: 600;
+        }
+
+        /* ============ THE CONVERGENCE ============ */
+        .convergence {
+            padding: 100px 0;
+        }
+
+        .convergence-title h2 {
+            text-align: center;
+            color: var(--electric-blue);
+            margin-bottom: 2em;
+        }
+
+        .convergence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 3em;
+        }
+
+        .convergence-pair {
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out backwards;
+        }
+
+        .convergence-pair:nth-child(1) { animation-delay: 0.1s; }
+        .convergence-pair:nth-child(2) { animation-delay: 0.2s; }
+        .convergence-pair:nth-child(3) { animation-delay: 0.3s; }
+        .convergence-pair:nth-child(4) { animation-delay: 0.4s; }
+
+        .convergence-pair:hover {
+            background: rgba(0, 212, 255, 0.12);
+            border-color: var(--electric-blue);
+            box-shadow: var(--accent-glow);
+            transform: translateY(-5px);
+        }
+
+        .convergence-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1em;
+        }
+
+        .convergence-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--electric-blue);
+            line-height: 1.5;
+        }
+
+        .convergence-thesis {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--electric-pink);
+            font-weight: 600;
+            margin-top: 2em;
+            padding-top: 2em;
+            border-top: 2px solid rgba(255, 0, 110, 0.3);
+        }
+
+        /* ============ CORE PRINCIPLES ============ */
+        .principles {
+            padding: 100px 0;
+        }
+
+        .principles h2 {
+            text-align: center;
+            color: var(--electric-blue);
+            margin-bottom: 3em;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(166, 77, 255, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out backwards;
+        }
+
+        .principle-card:nth-child(1) { animation-delay: 0.05s; }
+        .principle-card:nth-child(2) { animation-delay: 0.1s; }
+        .principle-card:nth-child(3) { animation-delay: 0.15s; }
+        .principle-card:nth-child(4) { animation-delay: 0.2s; }
+        .principle-card:nth-child(5) { animation-delay: 0.25s; }
+        .principle-card:nth-child(6) { animation-delay: 0.3s; }
+        .principle-card:nth-child(7) { animation-delay: 0.35s; }
+
+        .principle-card:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(166, 77, 255, 0.1));
+            border-color: var(--electric-blue);
+            box-shadow: var(--accent-glow);
+            transform: translateY(-8px);
+        }
+
+        .principle-card h3 {
+            font-size: 1.1rem;
+            color: var(--electric-blue);
+            margin-bottom: 0.8em;
+        }
+
+        .principle-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5em;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .principle-card:hover .principle-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* ============ SELF-* PROGRESSION ============ */
+        .progression {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .progression h2 {
+            color: var(--electric-blue);
+            margin-bottom: 3em;
+        }
+
+        .progression-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            position: relative;
+        }
+
+        .progression-step {
+            padding: 40px 20px;
+            background: rgba(0, 212, 255, 0.08);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out backwards;
+            position: relative;
+        }
+
+        .progression-step:nth-child(1) { animation-delay: 0.1s; }
+        .progression-step:nth-child(2) { animation-delay: 0.2s; }
+        .progression-step:nth-child(3) { animation-delay: 0.3s; }
+        .progression-step:nth-child(4) { animation-delay: 0.4s; }
+
+        .progression-step::after {
+            content: '';
+            position: absolute;
+            right: -22px;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: var(--electric-blue);
+            transform: translateY(-50%);
+        }
+
+        .progression-step:last-child::after {
+            display: none;
+        }
+
+        .progression-step:hover {
+            background: rgba(0, 212, 255, 0.12);
+            border-color: var(--electric-blue);
+            box-shadow: var(--accent-glow);
+            transform: translateY(-5px);
+        }
+
+        .progression-step h3 {
+            color: var(--electric-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.5em;
+        }
+
+        .progression-step p {
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .progression-step::after {
+                display: none;
+            }
+        }
+
+        /* ============ THE PLATFORM ============ */
+        .platform {
+            padding: 100px 0;
+        }
+
+        .platform h2 {
+            text-align: center;
+            color: var(--electric-blue);
+            margin-bottom: 3em;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .platform-suite {
+            background: linear-gradient(135deg, rgba(166, 77, 255, 0.1), rgba(0, 212, 255, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out backwards;
+        }
+
+        .platform-suite:nth-child(1) { animation-delay: 0.1s; }
+        .platform-suite:nth-child(2) { animation-delay: 0.2s; }
+        .platform-suite:nth-child(3) { animation-delay: 0.3s; }
+
+        .platform-suite:hover {
+            background: linear-gradient(135deg, rgba(166, 77, 255, 0.15), rgba(0, 212, 255, 0.1));
+            border-color: var(--electric-blue);
+            box-shadow: var(--accent-glow);
+            transform: translateY(-10px);
+        }
+
+        .platform-suite h3 {
+            color: var(--electric-blue);
+            margin-bottom: 1.2em;
+        }
+
+        .platform-items {
+            list-style: none;
+        }
+
+        .platform-items li {
+            padding: 0.6em 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            font-size: 0.95rem;
+        }
+
+        .platform-items li:last-child {
+            border-bottom: none;
+        }
+
+        /* ============ DECENTRALIZED FUTURE ============ */
+        .future {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .future h2 {
+            color: var(--electric-blue);
+            margin-bottom: 2em;
+        }
+
+        .future-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .future-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5em;
+            line-height: 1.9;
+        }
+
+        .protocol-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--electric-blue);
+            border-radius: 4px;
+            color: var(--electric-blue);
+            font-weight: 600;
+            margin: 1em 0;
+            transition: var(--transition);
+        }
+
+        .protocol-link:hover {
+            background: var(--electric-blue);
+            color: var(--dark-bg);
+            box-shadow: var(--accent-glow);
+        }
+
+        /* ============ THE INVITATION ============ */
+        .invitation {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .invitation h2 {
+            color: var(--electric-blue);
+            margin-bottom: 1.5em;
+        }
+
+        .invitation-content {
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .invitation-content p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            margin-bottom: 1.5em;
+        }
+
+        .invitation-highlight {
+            color: var(--electric-pink);
+            font-weight: 600;
+        }
+
+        .invitation-cta {
+            margin-top: 2em;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background-color: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: var(--electric-blue);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--electric-pink);
+        }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-50px);
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 80px rgba(0, 212, 255, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 120px rgba(0, 212, 255, 0.6);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ============ SCROLL TRIGGER ANIMATIONS ============ */
+        .fade-in {
+            opacity: 0;
+        }
+
+        .fade-in.visible {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 80px 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 40px 0;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .convergence-pair {
+                padding: 30px 20px;
+            }
+
+            .convergence-text {
+                font-size: 1.1rem;
+            }
+
+            .invitation-content p {
+                font-size: 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .principle-card,
+            .convergence-pair {
+                padding: 20px;
+            }
+
+            .platform-suite {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>MILLIPRIMES</h1>
+            <p class="subtitle">The Age of Absolute Abundance Starts Here</p>
+            <p class="tagline">We are the operators who build, govern, and multiply AI-driven systems for the benefit of the world.</p>
+            <a href="#manifesto" class="btn primary">Read the Manifesto</a>
+        </div>
+    </section>
+
+    <!-- THE SHIFT SECTION -->
+    <section class="section the-shift" id="the-shift">
+        <div class="container">
+            <div class="shift-content">
+                <h2>The Shift</h2>
+                <p class="shift-text">
+                    The world changed. AI agents build apps in minutes. The bottleneck is no longer code — it's judgment, trust, governance, and taste. A new archetype has emerged: the Milliprime.
+                </p>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">30 min</div>
+                        <div class="stat-label">To Build a Platform</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Systems One Operator Can Run</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">$1/mo</div>
+                        <div class="stat-label">What Tools Should Cost</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHO ARE MILLIPRIMES -->
+    <section class="section dark-alt who-are">
+        <div class="container">
+            <h2>Who Are Milliprimes?</h2>
+            <p class="who-statement">Not CEOs. Not engineers. <strong>OPERATORS.</strong></p>
+            <p class="who-statement"><strong>Virtuous idealists with rage and ferocity.</strong></p>
+            <p class="who-statement">The good have always been brought down. <strong>Not anymore.</strong></p>
+            <p class="who-statement">Milliprimes don't want profit. <strong>They want impact.</strong></p>
+        </div>
+    </section>
+
+    <!-- THE CONVERGENCE -->
+    <section class="section convergence">
+        <div class="container">
+            <div class="convergence-title">
+                <h2>The Convergence</h2>
+            </div>
+            <div class="convergence-grid">
+                <div class="convergence-pair">
+                    <div class="convergence-label">Execution</div>
+                    <div class="convergence-text">Automation = Execution</div>
+                </div>
+                <div class="convergence-pair">
+                    <div class="convergence-label">Business</div>
+                    <div class="convergence-text">Technology = Business</div>
+                </div>
+                <div class="convergence-pair">
+                    <div class="convergence-label">Engineering</div>
+                    <div class="convergence-text">Philosophy = Engineering</div>
+                </div>
+                <div class="convergence-pair">
+                    <div class="convergence-label">The Thesis</div>
+                    <div class="convergence-text">Convergence is Negligence Until Transcendence</div>
+                </div>
+            </div>
+            <p class="convergence-thesis">These forces are converging. Harness them.</p>
+        </div>
+    </section>
+
+    <!-- CORE PRINCIPLES -->
+    <section class="section dark-alt principles">
+        <div class="container">
+            <h2>Core Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">⚡</div>
+                    <h3>Fastest Design Wins</h3>
+                    <p>Speed is a strategic weapon. Design faster, iterate faster, win faster.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🔨</div>
+                    <h3>Build > Buy</h3>
+                    <p>When v1 takes hours, building beats buying. Control your destiny.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🔄</div>
+                    <h3>The Loop is the Unit of Competition</h3>
+                    <p>Feedback loops drive evolution. Shorten them. Master them.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🤝</div>
+                    <h3>Co-ops Beat Empires</h3>
+                    <p>Distributed ownership. Aligned incentives. Unstoppable.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🛡️</div>
+                    <h3>Governance is the New Moat</h3>
+                    <p>Trust and operations are what set you apart. Build them first.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">🚪</div>
+                    <h3>Exit is a Feature</h3>
+                    <p>True optionality. You own what you build. Exit when you choose.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">💎</div>
+                    <h3>The Virtue Play is Viable</h3>
+                    <p>Build for good. Build for impact. It's the strongest play.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELF-* PROGRESSION -->
+    <section class="section progression" id="progression">
+        <div class="container">
+            <h2>The Self-* Progression</h2>
+            <div class="progression-timeline">
+                <div class="progression-step">
+                    <h3>SELF-CREATE</h3>
+                    <p>Systems that autonomously design and build their own solutions.</p>
+                </div>
+                <div class="progression-step">
+                    <h3>SELF-TEST</h3>
+                    <p>Automated validation and quality assurance at scale.</p>
+                </div>
+                <div class="progression-step">
+                    <h3>SELF-HEAL</h3>
+                    <p>Resilient systems that detect and fix their own failures.</p>
+                </div>
+                <div class="progression-step">
+                    <h3>SELF-PIVOT</h3>
+                    <p>Adaptive systems that evolve their strategy based on outcomes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE PLATFORM -->
+    <section class="section dark-alt platform" id="platform">
+        <div class="container">
+            <h2>The Platform</h2>
+            <div class="platform-grid">
+                <div class="platform-suite">
+                    <h3>Marketing Suite</h3>
+                    <ul class="platform-items">
+                        <li>Cold email automation</li>
+                        <li>Social media orchestration</li>
+                        <li>YouTube content ops</li>
+                        <li>Affiliate networks</li>
+                        <li>Influencer coordination</li>
+                    </ul>
+                </div>
+                <div class="platform-suite">
+                    <h3>Business Orchestration Suite</h3>
+                    <ul class="platform-items">
+                        <li>Accounting & invoicing</li>
+                        <li>HR & payroll</li>
+                        <li>Compliance management</li>
+                        <li>Document generation</li>
+                        <li>Metrics & analytics</li>
+                        <li>Incident response</li>
+                    </ul>
+                </div>
+                <div class="platform-suite">
+                    <h3>Business Creation & Exit Suite</h3>
+                    <ul class="platform-items">
+                        <li>Entity creation</li>
+                        <li>Valuation modeling</li>
+                        <li>Due diligence automation</li>
+                        <li>Spin-out mechanics</li>
+                        <li>Cap table management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DECENTRALIZED FUTURE -->
+    <section class="section future">
+        <div class="container">
+            <h2>The Decentralized Future</h2>
+            <div class="future-content">
+                <p>
+                    Agent-to-agent protocols. Composable roles. Interchangeable agents. The future is not monolithic platforms — it's an ecosystem of decentralized agents that cooperate autonomously.
+                </p>
+                <p>
+                    <strong>The Agent Intake Protocol:</strong> The foundation for agent interoperability and decentralized governance.
+                </p>
+                <a href="https://agentintake.io/" class="protocol-link" target="_blank">Visit Agent Intake Protocol →</a>
+                <p style="margin-top: 2em; font-size: 0.95rem;">
+                    Future iterations: DAOs, decentralized language models (dLLMs), autonomous governance networks. The tools of collective intelligence.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE INVITATION -->
+    <section class="section dark-alt invitation" id="invitation">
+        <div class="container">
+            <h2>The Invitation</h2>
+            <div class="invitation-content">
+                <p>
+                    <span class="invitation-highlight">The world mints system-builders now.</span>
+                </p>
+                <p>
+                    <span class="invitation-highlight">The bottleneck is trust + operations + quality.</span>
+                </p>
+                <p>
+                    That's rare. That's power.
+                </p>
+                <p style="font-size: 1.4rem; margin: 2em 0; color: var(--electric-blue); font-weight: 600;">
+                    Join us.
+                </p>
+                <div class="invitation-cta">
+                    <a href="mailto:apollo.d.paradise@gmail.com" class="btn primary">Become a Milliprime</a>
+                </div>
+                <p style="margin-top: 1.5em; font-size: 0.9rem;">
+                    Or dive into the code: <a href="https://github.com" target="_blank">github.com/milliprimes</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>Milliprime Co-op | 2026</div>
+                <div class="footer-links">
+                    <a href="#hero">Manifesto</a>
+                    <a href="https://github.com" target="_blank">GitHub</a>
+                    <a href="https://agentintake.io/" target="_blank">Agent Intake Protocol</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe fade-in elements
+        document.querySelectorAll('.stat-card, .principle-card, .convergence-pair, .platform-suite, .progression-step, .who-statement').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+
+        // Add scroll indicator animation
+        const heroSection = document.querySelector('.hero');
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / window.innerHeight;
+            heroSection.style.opacity = Math.max(1 - scrollPercent * 2, 0);
+        });
+    </script>
+</body>
+</html>
