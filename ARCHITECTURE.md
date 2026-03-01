@@ -1,27 +1,23 @@
-# Milliprime Co-op Technical Architecture
+# MilliPrime Co-Op — Technical Architecture
 
-How Paul and Dan (and future members) collaborate, share infrastructure, and manage code/systems.
+How MilliPrime members collaborate, share infrastructure, and manage systems.
 
 ## 1. Co-op Structure
 
-The Milliprime Co-op is a lightweight collaborative structure. Not a formal legal entity (yet). It's a shared commitment to:
+The MilliPrime Co-op is a lightweight collaborative structure — a shared commitment to:
 - Build reusable infrastructure together
 - Share modules across projects
 - Maintain shared repositories and standards
 - Split revenue on shared products
 
-Future possibility: structure as a DAO with decentralized governance and dLLMs.
+Future possibility: structure as a DAO with decentralized governance.
 
 ## 2. GitHub Organization
 
-Propose a GitHub org structure. Paul already has:
-- https://github.com/agent-intake-protocol/agent-intake-protocol (AIP spec)
-- The AIP registry deploying to https://agentintake.io/
-
-Suggest a GitHub org like `milliprime` or `milliprime-coop` with repos:
+The co-op operates through a shared GitHub org with repos:
 - `manifesto` — the public-facing manifesto and movement docs
 - `shared-infra` — shared infrastructure modules (auth, monitoring, messaging, analytics, billing)
-- `kh` — Thousand Hands framework (Paul's meta-framework, may stay in Paul's personal repos)
+- `kh` — standards engine (protocols, templates, patterns)
 - `templates` — System Config templates, Journey Mapping templates, project scaffolding
 - Individual product repos as needed
 
@@ -31,15 +27,14 @@ Reusable modules every future project consumes:
 
 | Module | Purpose | Status |
 |--------|---------|--------|
-| Auth (Cognito-based) | User registration, OTP/MFA, JWT | Designed (1KH Playbook) |
-| Monitoring | Prometheus-style metrics, dashboard, alerting | Designed (KH_FUTURES) |
-| Messaging | SMS/WhatsApp/Email via SES/Twilio/Meta Cloud API | Partially built |
+| Auth (OTP-based) | User registration, OTP/MFA, JWT | Designed |
+| Monitoring | Prometheus-style metrics, dashboard, alerting | Designed |
+| Messaging | SMS/WhatsApp/Email dispatch | Partially built |
 | Analytics | Page views, conversions, funnel metrics | Not started |
-| Billing | Stripe/Square integration patterns | Partially built (MVH) |
-| Logging/Audit | Append-only event logs, action traces | Designed (1KH v2) |
-| Escalation | Issue severity, routing, notification | Designed (MVH Phase 2) |
+| Billing | Stripe/Square integration patterns | Partially built |
+| Logging/Audit | Append-only event logs, action traces | Designed |
+| Escalation | Issue severity, routing, notification | Designed |
 | Policy Rails | Agent permission boundaries, approval gates | Conceptual |
-| Agent Intake | Agent onboarding protocol (AIP) | Live at agentintake.io |
 
 ## 4. Tech Stack (The Founder's Playbook)
 
@@ -47,11 +42,11 @@ The co-op's opinionated tech stack:
 
 | Layer | Technology |
 |-------|-----------|
-| Local Dev | docker-compose (Postgres, Redis, Node app) |
-| Database | Aurora Serverless v2 (PostgreSQL) |
-| Data Access | Raw SQL via pg client (no ORM) |
-| API + Functions | Lambda + API Gateway via SST v3 (Ion) |
-| Auth | AWS Cognito |
+| Local Dev | docker-compose or vanilla Node.js |
+| Database | PostgreSQL (Aurora Serverless or Supabase) / SQLite for local |
+| Data Access | Raw SQL (no ORM) |
+| API + Functions | Lambda + API Gateway via SST v3 |
+| Auth | Cognito or custom OTP |
 | File Storage | S3 |
 | Email | SES |
 | Queues/Events | SQS + EventBridge |
@@ -59,71 +54,35 @@ The co-op's opinionated tech stack:
 | Frontend | Vanilla HTML/CSS/JS |
 | CDN/Hosting | CloudFront + S3 |
 | Monitoring | CloudWatch + custom dashboard |
-| Deployment | SST v3 (sst dev / sst deploy --stage prod) |
+| Deployment | SST v3 |
 
 ## 5. Development Workflow
 
-How co-op members work:
-
 ### Solo Work
-- Use Claude Code or OpenClaw for independent builds
-- OpenClaw for parallelizable standalone tools (GTM platforms, utilities)
-- Claude Code for codebase-aware iteration
-- Cowork for planning, documentation, coordination
+- Use AI coding agents for independent builds
+- Parallelize standalone tools and utilities
+- Sequential codebase-aware iteration for complex systems
 
 ### Collaborative Work
 - GitHub PRs for shared infrastructure changes
 - 1KH Executor Standards for complex journey work
-- System Configs for new business capabilities
 - Shared monitoring dashboard for operational visibility
 
-### Tool Allocation
-| Tool | Best For |
-|------|----------|
-| OpenClaw | Standalone builds, parallelization, quick prototypes |
-| Claude Code | Codebase-aware iteration, complex debugging, sequential work |
-| Cowork | Planning, documentation, coordination, research |
-| 1KH Executor | Journey-driven development, multi-step UAT, coherent systems |
-| 1KH SC Builder | Generating new JMs from System Config specs |
-
-## 6. Project Registry
-
-Track all active projects/systems:
-
-| Project | Owner | Status | Stack |
-|---------|-------|--------|-------|
-| Man vs Health | Paul | Phase 1 UAT → Go-Live | Supabase → Playbook (Phase 2) |
-| Agent Intake Protocol | Paul | Live (agentintake.io) | GitHub Pages + Registry |
-| Cold Email Platform | Paul | Built (GTM) | TBD |
-| Social DM Platform | Paul | Built (GTM) | TBD |
-| YouTube VideoGen | Paul | Built (GTM) | TBD |
-| YOMO | Paul | Concept → First campaign | TBD |
-| Jemini.io | Dan | Active consulting | Existing |
-| [New Intake Project] | Paul | Upcoming — first SC candidate | Playbook |
-
-## 7. Revenue Model
+## 6. Revenue Model
 
 How money flows in the co-op:
 
-1. **Consulting** (immediate revenue) — Client engagements through Jemini or direct
+1. **Consulting** (immediate revenue) — Client engagements
 2. **Modules** (leverage) — Each engagement produces reusable modules
-3. **Products** (recurring) — Modules packaged into SaaS products ($1-50/mo, affordable)
-4. **Platform Skins** (scale) — Marketing suite, orchestration suite, business creation suite
-5. **Spin-outs** (exit optionality) — Clean-room separation, due diligence packages, valuation snapshots
+3. **Products** (recurring) — Modules packaged into affordable SaaS ($1-50/mo)
+4. **Platform Suites** (scale) — Marketing suite, orchestration suite, business creation suite
+5. **Spin-outs** (exit optionality) — Clean-room separation, due diligence packages
 
-Flywheel: consulting → modules → products → distribution → more consulting → more modules
+Flywheel: **consulting → modules → products → distribution → more consulting → more modules**
 
-## 8. Communication & Coordination
+## 7. Onboarding New Members
 
-- GitHub Issues/Discussions for async technical coordination
-- Shared monitoring dashboard for operational awareness
-- Jam Session (future) for mobile input into the system
-- Regular sync meetings (weekly or bi-weekly)
-- Manifesto as the philosophical north star
-
-## 9. Onboarding New Members
-
-When a new Milliprime joins:
+When a new MilliPrime joins:
 1. Read the Manifesto
 2. Get added to GitHub org
 3. Get access to shared monitoring dashboard
@@ -131,4 +90,4 @@ When a new Milliprime joins:
 5. Pick a first project or contribution
 6. Pair with an existing member on first system build
 
-Keep it clean, technical but accessible. This is a working document, not a manifesto (that's MANIFESTO.md).
+This is a working document, not a manifesto (that's MANIFESTO.md).

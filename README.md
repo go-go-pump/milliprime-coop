@@ -1,11 +1,11 @@
 # The MilliPrime Co-Op
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
-[![Part of PUMP](https://img.shields.io/badge/ecosystem-PUMP-blue)](https://github.com/pump-engine)
+[![Part of PUMP](https://img.shields.io/badge/ecosystem-PUMP-blue)](https://github.com/go-go-pump)
 
 **A Systems Foundry for Indy Founders.**
 
-This repo is the philosophical and organizational home of the MilliPrime Co-Op. It contains the manifesto, architecture documents, and onboarding materials for the network of operators building the future of autonomous systems.
+This repo is the philosophical and organizational home of the MilliPrime Co-Op — a network of operators building autonomous systems that create real-world value.
 
 > *"This is not a business plan. This is a covenant. Sign it by building something true."*
 
@@ -16,8 +16,7 @@ This repo is the philosophical and organizational home of the MilliPrime Co-Op. 
 | Document | What It Is |
 |----------|-----------|
 | **[MANIFESTO.md](MANIFESTO.md)** | The full declaration — philosophy, principles, the Self-* progression, the decentralized future |
-| **[ARCHITECTURE.md](ARCHITECTURE.md)** | Technical co-op architecture — how the infrastructure actually works |
-| **[DAN_ONBOARDING.md](DAN_ONBOARDING.md)** | Onboarding guide — how to bring new MilliPrimes into the fold |
+| **[ARCHITECTURE.md](ARCHITECTURE.md)** | Technical co-op architecture — how the infrastructure works |
 
 ---
 
@@ -50,9 +49,9 @@ This isn't a movement we're trying to create. It's a phenomenon we're naming.
 
 | Repo | Purpose |
 |------|---------|
-| [god-mode](https://github.com/pump-engine/god-mode) | Entry point + PUMP master spec (private) |
-| [1kh](https://github.com/pump-engine/1kh) | Standards engine — protocols, templates, patterns |
-| [greenspaces](https://github.com/pump-engine/greenspaces) | Shared components + services catalog |
+| [god-mode](https://github.com/go-go-pump/god-mode) | Entry point + PUMP master spec (private) |
+| [1kh](https://github.com/go-go-pump/1kh) | Standards engine — protocols, templates, patterns |
+| [greenspaces](https://github.com/go-go-pump/greenspaces) | Shared components + services catalog |
 | **milliprime-coop** (this repo) | Philosophy, manifesto, co-op structure |
 
 ---
